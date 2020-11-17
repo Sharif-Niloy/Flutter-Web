@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:which_famous_person_are_you/view/screen_question.dart';
+import 'package:which_famous_person_are_you/view/screen_splash_loading.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: QuestionScreen(),
+      home: LoadingScreen(),
     );
   }
 }

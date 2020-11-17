@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:which_famous_person_are_you/models/model_quizBrain.dart';
-import 'package:which_famous_person_are_you/widgets/widget_custom_button.dart';
-
-//TODO 1 DONE: Implement The Questions at the top
-//TODO 2 DONE: Implement an image in the middle
-//TODO 3 DONE: Implement TRUE / FALSE Buttons vertically after the Image
-//TODO 4 DONE: Implement a Progress Bar At The Bottom
-//TODO 5 DONE: Implement The Brain Logics
-//TODO 6 DONE: Implement End Of Quiz Checking
-//TODO 7: Re-route to Result Page upon quiz finishing
-
-//TODO 8: Plan again about result page UI
+import 'package:which_famous_person_are_you/widgets/widget_custom_selection_button.dart';
+import 'package:which_famous_person_are_you/view/screen_result.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class QuestionScreen extends StatefulWidget {
   @override
@@ -32,21 +23,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
     setState(
       () {
         if (quizBrain.isFinished() == true) {
-          Alert(
-            context: context,
-            title: "Finished!",
-            desc: "You've reached the end of the quiz",
-            buttons: [
-              DialogButton(
-                child: Text(
-                  "CANCEL",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                onPressed: () => Navigator.pop(context),
-                width: 120,
-              )
-            ],
-          ).show();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ResultScreen(),
+            ),
+          );
 
           quizBrain.reset();
           scoreKeeper.clear();
@@ -87,13 +69,14 @@ class _QuestionScreenState extends State<QuestionScreen> {
           Expanded(
             flex: 2,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 50, 15, 40),
+              padding: EdgeInsets.fromLTRB(15, 30, 15, 40),
               child: Text(
                 quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25,
-                  color: Colors.black,
+                  fontFamily: 'Pangolin',
+                  color: Color(0xFF5880EA),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -137,6 +120,22 @@ class _QuestionScreenState extends State<QuestionScreen> {
             userAnswer: () {
               checkAnswer(false);
             },
+          ),
+
+          // Progress Indicator Here
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: LinearPercentIndicator(
+              animation: true,
+              lineHeight: 20.0,
+              animationDuration: 2000,
+              percent: 0.9,
+
+              //TODO 2: Make This Percentage Dynamic
+              center: Text("90.0%"),
+              linearStrokeCap: LinearStrokeCap.roundAll,
+              progressColor: Colors.greenAccent,
+            ),
           ),
         ],
       ),

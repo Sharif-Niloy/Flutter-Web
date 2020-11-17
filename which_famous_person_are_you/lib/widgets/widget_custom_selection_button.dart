@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SelectionButton extends StatelessWidget {
-  SelectionButton({this.answerOption, this.userAnswer});
-  final String answerOption;
-  final Function userAnswer;
+  SelectionButton({this.userAnswer, this.answerOption});
+  final answerOption;
+  final userAnswer;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class SelectionButton extends StatelessWidget {
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.4),
                   blurRadius: 2,
-                  spreadRadius: 3,
+                  spreadRadius: 5,
                   offset: Offset(1, 1),
                 ),
               ],
